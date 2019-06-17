@@ -72,12 +72,12 @@ pipeline {
     }
         stage('Build') {
             steps {
-                sh 'mvn -B -DskipTests -Drevision=${CURRENT_REVISION} clean package'
+                sh "mvn -B -DskipTests -Drevision=${CURRENT_REVISION} clean package"
             }
         }
         stage('Test') {
             steps {
-                sh 'mvn -Drevision=${CURRENT_REVISION} test'
+                sh "mvn -Drevision=${CURRENT_REVISION} test"
             }
             post {
                 always {
