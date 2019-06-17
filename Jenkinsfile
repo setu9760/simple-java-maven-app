@@ -9,6 +9,7 @@ pipeline {
         label 'master'
     }    
     environment {
+        GIT_COMMIT_SHORT = sh(script: "printf \$(git rev-parse --short ${GIT_COMMIT})", returnStdout: true)
         ARTIFACT_ID = readMavenPom().getArtifactId()
         OWNER = 'platform'
         IMAGE_NAME = "${OWNER}/${ARTIFACT_ID}"
@@ -30,15 +31,6 @@ pipeline {
     }
 
     stages {
-//       stage('Git checkout') {
-//           steps {
-//               checkout([$class: 'GitSCM', 
-//                         branches: [[name: '*/master']], 
-//                         doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], 
-//                         userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/setu9760/simple-java-maven-app']]
-//               ])
-//           }
-//       }
        stage('List change sets') {
           steps {
             script {
