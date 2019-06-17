@@ -56,7 +56,7 @@ pipeline {
           CURRENT_REVISION = "${revision.current.major}.${revision.current.minor}.${revision.current.patch}-${env.BUILD_ID}"
           currentBuild.displayName = "${CURRENT_REVISION}"
           echo "Current revision: ${CURRENT_REVISION}"
-          if (isRelease == true) {
+          if (isRelease == 'true') {
             RELEASE_MAJOR = "${revision.release.major}"
             RELEASE_MINOR = "${revision.release.minor}"
             RELEASE_PATCH = "${revision.release.patch}"
