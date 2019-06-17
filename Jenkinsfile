@@ -93,16 +93,16 @@ pipeline {
             }
         }
     }
-    stage('Deliver') {
-        steps {
+//    stage('Deliver') {
+//        steps {
 //            sh './jenkins/scripts/deliver.sh'
 //            script {
 //                def revision = readYaml file: 'revision.yml'
 //                CURRENT_REVISION = "${revision.current.major}.${revision.current.minor}.${revision.current.patch}-${env.BUILD_ID}"
 //                writeYaml file: 'revision.copy.yaml', data: revision
 //            }              
-        }
-    }
+//        }
+//    }
     stage('Build Docker image') {
       steps {
         script {
