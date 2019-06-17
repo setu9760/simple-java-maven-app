@@ -1,10 +1,10 @@
 current:
   major: 0
   minor: 0
-  patch: 5
+  patch: 6
 release:  
   major: 0
   minor: 0
-  patch: 5
-  build: 109
-  commit: 439f0f4
+  patch: 6
+  build: 12
+  commit: 5697574
