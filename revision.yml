@@ -5,6 +5,6 @@ current:
 release:  
   major: 0
   minor: 0
-  patch: 4
+  patch: 5
   build: 109
-  commit: a690e53
+  commit: 439f0f4
