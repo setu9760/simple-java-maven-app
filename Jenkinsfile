@@ -104,7 +104,6 @@ pipeline {
               sh "git tag -a ${RELEASE_MAJOR_MINOR_PATCH} -m '${RELEASE_MAJOR_MINOR_PATCH}' ${RELEASE_COMMIT}"
               sh "git push origin --tags"
             }          
-          }                    
-    }
+        }
     }
 }
