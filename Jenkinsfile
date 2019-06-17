@@ -5,6 +5,9 @@ pipeline {
 //            args '-v /root/.m2:/root/.m2'
 //        }
 //   }
+    agent {
+        label 'master'
+    }    
     environment {
         ARTIFACT_ID = readMavenPom().getArtifactId()
         OWNER = 'platform'
