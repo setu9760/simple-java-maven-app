@@ -49,6 +49,7 @@ pipeline {
               }
             }
           }
+        }
     }
     stage('Read revision metadata') {
       steps {
