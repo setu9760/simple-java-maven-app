@@ -21,10 +21,10 @@ pipeline {
         dockerImage = ''
         isRelease = false
     }
-    tools {
-        maven 'Maven 3.5.3'
-        jdk 'Java8'
-    }
+    //tools {
+    //    maven 'Maven 3.5.3'
+    //    jdk 'Java8'
+    //}
 
     stages {
                 stage('List change sets') {
