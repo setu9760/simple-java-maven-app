@@ -70,43 +70,45 @@ pipeline {
         }
       }
     }
-        stage('SonarQube Analysis') {
-                withSonarQubeEnv('SonarQube Scanner 2.8') {
-                    // requires SonarQube Scanner for Maven 3.2+
-                    sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
-                } 
+    stage('SonarQube Analysis') {
+      steps {
+         withSonarQubeEnv('SonarQube Scanner 2.8') {
+            // requires SonarQube Scanner for Maven 3.2+
+            sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
         }
-        stage('Build') {
-            steps {
-                sh "mvn -B -DskipTests -Drevision=${CURRENT_REVISION} clean package"
-            }
-        }
-        stage('Test') {
-            steps {
-                sh "mvn -Drevision=${CURRENT_REVISION} test"
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
-            }
-        }
-        stage('Deliver') {
-            steps {
-                sh './jenkins/scripts/deliver.sh'
-            }
-        }
-        stage('Release') {
-          when {
-            expression {
-              return isRelease == 'true'
-            }
-          }
-          steps {
-              // Git
-              sh "git tag -a ${RELEASE_MAJOR_MINOR_PATCH} -m '${RELEASE_MAJOR_MINOR_PATCH}' ${RELEASE_COMMIT}"
-              sh "git push origin --tags"
-            }          
+      }
+    }
+    stage('Build') {
+        steps {
+            sh "mvn -B -DskipTests -Drevision=${CURRENT_REVISION} clean package"
         }
     }
+    stage('Test') {
+        steps {
+            sh "mvn -Drevision=${CURRENT_REVISION} test"
+        }
+        post {
+            always {
+                junit 'target/surefire-reports/*.xml'
+            }
+        }
+    }
+    stage('Deliver') {
+        steps {
+            sh './jenkins/scripts/deliver.sh'
+        }
+    }
+    stage('Release') {
+      when {
+        expression {
+          return isRelease == 'true'
+        }
+      }
+      steps {
+          // Git
+          sh "git tag -a ${RELEASE_MAJOR_MINOR_PATCH} -m '${RELEASE_MAJOR_MINOR_PATCH}' ${RELEASE_COMMIT}"
+          sh "git push origin --tags"
+        }          
+    }
+ }
 }
