@@ -26,8 +26,9 @@ pipeline {
         maven 'Maven 3.5.3'
         jdk 'Java8'
     }
+
     stages {
-        stage('List change sets') {
+                stage('List change sets') {
           steps {
             script {
               def changeLogSets = currentBuild.changeSets
@@ -50,7 +51,6 @@ pipeline {
             }
           }
         }
-    }
     stage('Read revision metadata') {
       steps {
         script {
@@ -71,7 +71,6 @@ pipeline {
         }
       }
     }
-    stages {
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
