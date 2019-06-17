@@ -106,7 +106,7 @@ pipeline {
     stage('Build Docker image') {
       steps {
         script {
-          dockerImage = docker.build("${IMAGE_NAME}:${CURRENT_REVISION}", "--build-arg REVISION=${CURRENT_REVISION} ARTIFACT_ID=${ARTIFACT_ID} .")
+          dockerImage = docker.build("${IMAGE_NAME}:${CURRENT_REVISION}", "--build-arg REVISION=${CURRENT_REVISION} --build-arg ARTIFACT_ID=${ARTIFACT_ID} .")
         }
       }
     }        
