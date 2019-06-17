@@ -30,15 +30,15 @@ pipeline {
     }
 
     stages {
-       stage('Git checkout') {
-           steps {
-               checkout([$class: 'GitSCM', 
-                         branches: [[name: '*/master']], 
-                         doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], 
-                         userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/setu9760/simple-java-maven-app']]
-               ])
-           }
-       }
+//       stage('Git checkout') {
+//           steps {
+//               checkout([$class: 'GitSCM', 
+//                         branches: [[name: '*/master']], 
+//                         doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], 
+//                         userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/setu9760/simple-java-maven-app']]
+//               ])
+//           }
+//       }
        stage('List change sets') {
           steps {
             script {
