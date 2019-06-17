@@ -6,7 +6,6 @@ pipeline {
         }
     }
     environment {
-        GIT_COMMIT_SHORT = sh(script: "printf \$(git rev-parse --short ${GIT_COMMIT})", returnStdout: true)
         ARTIFACT_ID = readMavenPom().getArtifactId()
         OWNER = 'platform'
         IMAGE_NAME = "${OWNER}/${ARTIFACT_ID}"
@@ -55,7 +54,7 @@ pipeline {
       steps {
         script {
           def revision = readYaml file: 'revision.yml'
-          CURRENT_REVISION = "${revision.current.major}.${revision.current.minor}.${revision.current.patch}-${env.BUILD_ID}-${GIT_COMMIT_SHORT}"
+          CURRENT_REVISION = "${revision.current.major}.${revision.current.minor}.${revision.current.patch}-${env.BUILD_ID}"
           currentBuild.displayName = "${CURRENT_REVISION}"
           echo "Current revision: ${CURRENT_REVISION}"
           if (isRelease == true) {
