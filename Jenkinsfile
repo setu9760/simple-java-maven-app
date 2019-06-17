@@ -22,7 +22,7 @@ pipeline {
         RELEASE_COMMIT = ''
         RELEASE_REVISION = ''
         dockerImage = ''
-        isRelease = false
+        isRelease = "${env.releaseBuild}"
     }
     tools {
         maven 'Maven 3.5.3'
@@ -93,5 +93,18 @@ pipeline {
                 sh './jenkins/scripts/deliver.sh'
             }
         }
+        stage('Release') {
+          when {
+            expression {
+              return isRelease == true
+            }
+          }
+          steps {
+              // Git
+              sh "git tag -a ${RELEASE_MAJOR_MINOR_PATCH} -m '${RELEASE_MAJOR_MINOR_PATCH}' ${RELEASE_COMMIT}"
+              sh "git push origin --tags"
+            }          
+          }                    
+    }
     }
 }
