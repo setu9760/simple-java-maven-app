@@ -1,10 +1,10 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3-alpine'
-            args '-v /root/.m2:/root/.m2'
-        }
-    }
+//    agent {
+//        docker {
+//            image 'maven:3-alpine'
+//            args '-v /root/.m2:/root/.m2'
+//        }
+//   }
     environment {
         ARTIFACT_ID = readMavenPom().getArtifactId()
         OWNER = 'platform'
@@ -21,10 +21,10 @@ pipeline {
         dockerImage = ''
         isRelease = false
     }
-    //tools {
-    //    maven 'Maven 3.5.3'
-    //    jdk 'Java8'
-    //}
+    tools {
+        maven 'Maven 3.5.3'
+        jdk 'Java8'
+    }
 
     stages {
                 stage('List change sets') {
