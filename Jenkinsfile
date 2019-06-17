@@ -96,6 +96,11 @@ pipeline {
     stage('Deliver') {
         steps {
             sh './jenkins/scripts/deliver.sh'
+            script {
+                def revision = readYaml file: 'revision.yml'
+                CURRENT_REVISION = "${revision.current.major}.${revision.current.minor}.${revision.current.patch}-${env.BUILD_ID}"
+                writeYaml file: 'revision.copy.yaml', data: revision
+            }              
         }
     }
     stage('Release') {
@@ -107,12 +112,7 @@ pipeline {
       steps {
           // Git
           sh "git tag -a ${RELEASE_MAJOR_MINOR_PATCH} -m '${RELEASE_MAJOR_MINOR_PATCH}' ${RELEASE_COMMIT}"
-          sh "git push origin --tags"
-          script {
-            def revision = readYaml file: 'revision.yml'
-            CURRENT_REVISION = "${revision.current.major}.${revision.current.minor}.${revision.current.patch}-${env.BUILD_ID}"
-            writeYaml file: 'revision.copy.yaml', data: revision
-          }          
+          sh "git push origin --tags"    
         }          
     }
  }
